@@ -1,0 +1,60 @@
+<!--JQuery-->
+<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<!-- my scripts -->
+<script type="text/javascript" src="{{ url_for('static', filename = 'attend.js') }}"></script>
+
+<style>
+    #categories {
+      font-weight: bold;
+    }
+    #prompt {
+      margin-bottom: 20px;
+    }
+    #search {
+      margin-bottom: 20px;
+    }
+    .btn {
+      margin-left: 5px;
+      margin-top: -5px;
+    }
+    #enter_name {
+      margin-left: 5px;
+      margin-top: -3px;
+    }
+</style>
+
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="row" id="prompt">
+  <h4>Do you know what you're bringing to the potluck?</h4>
+</div>
+
+<div class="row" id="search">
+  <div class="md-col-4">
+      Find my potluck assignment:
+  </div>
+  <div class="md-col-2">
+    <input type="text" id="enter_name" placeholder="Name"></input>
+  </div>
+  <button class="btn btn-warning" id="find">Find</button>
+</div>
+
+<div class="row" id="categories">
+    <div class="col-md-2">
+        Name:
+    </div>
+    <div class="col-md-2">
+        Potluck item:
+    </div>
+    <div class="col-md-2">
+        Quantity:
+    </div>
+</div>
+
+<div id="items">
+</div>
+
+{% endblock %}
