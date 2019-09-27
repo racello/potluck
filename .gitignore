@@ -1,0 +1,4 @@
+__pycache__/
+myproject.ini
+myprojectenv/
+wsgi.py
