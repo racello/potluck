@@ -4,13 +4,11 @@
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <!-- my scripts -->
 <script type="text/javascript" src="{{ url_for('static', filename = 'host.js') }}"></script>
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
 
 <style>
-    #entry {
-      margin-top: 20px;
-      margin-bottom: 15px;
-      padding: 25px;
-      background-color: lightblue;
+    #categories {
+      font-weight: bold;
     }
     .btn {
       margin-left: 10px;
@@ -18,9 +16,10 @@
     .entry {
       margin: 5px;
     }
-    #categories {
-      padding: 10px;
-      font-weight: bold;
+    #icons {
+      padding: 25px;
+      height: 150px;
+      padding-bottom: 50px;
     }
     #submit {
       margin-top: -5px;
@@ -37,20 +36,20 @@
 
 <h4> You decide who's bringing what! &#11088;</h4>
 
-<div class="row" id="entry">
-    <div class="col-md-2">
-        Add new attendee:
-    </div>
-    <div class="col-md-2">
-        <input type="text" id="enter_name" placeholder="Name"></input>
-    </div>
-    <div class="col-md=2">
-        <input type="text" id="enter_food" placeholder="Food/drink"></input>
-    </div>
-    <div class="col-md-2">
-        <input type="text" id="enter_quant" placeholder="Quantity"></input>
-    </div>
-    <button class="btn btn-primary" id="submit">Submit</button>
+<p>Current number of guests: {{guests}}</p>
+
+<div class="row" id="icons">
+  <div class="col-md-1">
+    Add entry:
+  </div>
+    <button id="meat" style='font-size:70px' class="btn btn-primary"> <i class='fas fa-drumstick-bite'></i></button>
+    <button id="veggie" style='font-size:70px' class="btn btn-primary icon"> <i class='fas fa-carrot'></i></button>
+    <button id="grain" style='font-size:70px' class="btn btn-primary icon"> <i class='fas fa-bread-slice'></i></button>
+    <button id="appetizer" style='font-size:70px' class="btn btn-primary icon"> <i class='fas fa-cheese'></i></button>
+    <button id="dessert" style='font-size:70px' class="btn btn-primary icon"> <i class='fas fa-cookie-bite'></i></button>
+    <button id="drink" style='font-size:70px' class="btn btn-primary icon"> <i class='fas fa-cocktail'></i></button>
+    <button id="supplies" style='font-size:70px' class="btn btn-primary icon"> <i class='fas fa-utensils'></i></button>
+    <button id="other" style='font-size:70px' class="btn btn-primary icon"> <i class='fas fa-plus'></i></button>
 </div>
 
 <div class="row" id="categories">
@@ -59,9 +58,6 @@
     </div>
     <div class="col-md-2">
         Potluck item:
-    </div>
-    <div class="col-md-2">
-        Quantity:
     </div>
 </div>
 

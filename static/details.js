@@ -30,7 +30,7 @@ var save_info = function(details) {
     data: JSON.stringify(details),
     success: function(all_info, text) {
       var all_info = all_info["potluck"]
-      console.log(all_info)
+      window.location.href = 'host'
     },
     error: function(request, status, error) {
       console.log("Error")

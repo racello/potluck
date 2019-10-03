@@ -1,0 +1,26 @@
+<!--JQuery-->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<!-- my scripts -->
+<script type="text/javascript" src="{{ url_for('static', filename = 'add.js') }}"></script>
+
+{% extends "layout.html" %}
+
+{% block content %}
+
+<h4>Add a grain to your potluck: </h4>
+
+Type:
+<select id="select">
+  <option value="Rice">Rice</option>
+  <option value="Pasta">Pasta</option>
+  <option value="Bread">Bread</option>
+  <option value="Pita">Pita</option>
+  <option value="Quinoa">Quinoa</option>
+</select>
+
+Who's bringing it?
+<input type="text" id="enter_name" placeholder="Name"></input>
+<button class="btn btn-primary" id="submit">Submit</button>
+{% endblock %}

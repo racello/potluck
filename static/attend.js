@@ -58,10 +58,6 @@ var display_attendees = function(items) {
     $(col_food).append(item["food"])
     $(row).append(col_food)
 
-    var col_quantity = $("<div class='col-md-2' id='" + id + "'>")
-    $(col_quantity).append(item["quantity"])
-    $(row).append(col_quantity)
-
     $('#items').prepend(row)
   })
 }
