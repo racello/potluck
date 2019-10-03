@@ -5,6 +5,8 @@ app = Flask(__name__)
 
 current_id = 31
 
+potluck = {}
+
 items = [
     {
         "id": 1,
@@ -223,15 +225,30 @@ food = [
 
 @app.route('/')
 def home():
-   return render_template('home.html', items = items, food = food)
+   return render_template('home.html', potluck = potluck, items = items, food = food)
 
 @app.route('/host')
 def host(name=None):
-    return render_template('host.html', items = items, food = food)
+    return render_template('host.html', potluck = potluck, items = items, food = food)
 
 @app.route('/attend')
 def attend(name=None):
-    return render_template('attend.html', items = items, food = food)
+    return render_template('attend.html', potluck = potluck, items = items, food = food)
+
+@app.route('/details')
+def details(name=None):
+    return render_template('details.html', potluck = potluck, items = items, food = food)
+
+@app.route('/save_info', methods=['GET', 'POST'])
+def save_info():
+    global potluck
+
+    event_details = request.get_json()
+    potluck["date"] = event_details["date"]
+    potluck["time"] = event_details["time"]
+    potluck["location"] = event_details["location"]
+
+    return jsonify(potluck = potluck)
 
 @app.route('/save_data', methods=['GET', 'POST'])
 def save_data():
@@ -250,7 +267,7 @@ def save_data():
     if new_food not in food:
         food.append(new_food)
 
-    return jsonify(items = items, food = food)
+    return jsonify(potluck = potluck, items = items, food = food)
 
 @app.route('/update_quant', methods=['GET', 'POST'])
 def update_quant():
@@ -267,7 +284,7 @@ def update_quant():
             if value == name:
                 d["quantity"] = updated
 
-    return jsonify(items = items, food = food)
+    return jsonify(potluck = potluck, items = items, food = food)
 
 #update food
 @app.route('/update_data', methods=['GET', 'POST'])
@@ -288,7 +305,7 @@ def update_data():
     if updated not in food:
         food.append(updated)
 
-    return jsonify(items = items, food = food)
+    return jsonify(potluck = potluck, items = items, food = food)
 
 @app.route('/delete_item', methods=['GET', 'POST'])
 def delete_item():
@@ -318,7 +335,7 @@ def delete_item():
     if index_to_delete is not None:
         del items[index_to_delete]
 
-    return jsonify(items = items, food = food)
+    return jsonify(potluck = potluck, items = items, food = food)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
