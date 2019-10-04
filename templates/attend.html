@@ -23,35 +23,66 @@
       margin-left: 5px;
       margin-top: -3px;
     }
+    #card {
+      background-color: white;
+      width: 50%;
+      margin: auto;
+      padding: 50px;
+      border-radius: 15px;
+    }
+    #items {
+      overflow-y: auto;
+      height: 45%;
+    }
+    #info {
+      position: fixed;
+      width: 15%;
+      top: 15%;
+      left: 7.5%;
+      border-radius: 15px;
+      margin-bottom: 10px;
+      padding: 20px;
+      background-color: white;
+    }
+    .deet {
+      padding-left: 17px;
+    }
 </style>
 
 {% extends "layout.html" %}
 
 {% block content %}
-<div class="row" id="prompt">
-  <h4>Do you know what you're bringing to the potluck?</h4>
-</div>
 
-<div class="row" id="search">
-  <div class="md-col-4">
-      Find my potluck assignment:
+<div id="card">
+  <div class="row" id="prompt">
+    <h4>Do you know what you're bringing to the potluck?</h4>
   </div>
-  <div class="md-col-2">
-    <input type="text" id="enter_name" placeholder="Name"></input>
+  <div id="info">
+    <p style="font-weight: bold;">Event details</p>
+    <div id="details"></div>
   </div>
-  <button class="btn btn-warning" id="find">Find</button>
-</div>
 
-<div class="row" id="categories">
-    <div class="col-md-2">
-        Name:
+  <div class="row" id="search">
+    <div class="md-col-4">
+        Find my potluck assignment:
     </div>
-    <div class="col-md-2">
-        Potluck item:
+    <div class="md-col-2">
+      <input type="text" id="enter_name" placeholder="Name"></input>
     </div>
-</div>
+    <button class="btn btn-warning" id="find">Find</button>
+  </div>
 
-<div id="items">
+  <div class="row" id="categories">
+      <div class="col-md-4">
+          Name:
+      </div>
+      <div class="col-md-4">
+          Potluck item:
+      </div>
+  </div>
+
+  <div id="items">
+  </div>
 </div>
 
 {% endblock %}

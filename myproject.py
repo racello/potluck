@@ -136,6 +136,7 @@ items = [
 ]
 guests = len(items)
 
+#no longer in use but just keep here for sake of ease lol
 food = [
     "veggies",
     "cherries",

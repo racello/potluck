@@ -7,35 +7,59 @@
       padding: 10px;
     }
     h1, h3 {
-      text-align: center;
+      text-align: left;
       padding: 5px;
     }
-    .btn {
-      margin: auto;
+    h1 {
+      padding-top: 20px;
     }
     .buttons {
       margin-top: 10px;
+    }
+    .btn {
+      font-size: 13px;
+    }
+    #card {
+      background-color: white;
+      width: 40%;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 50px;
+      border-radius: 15px;
+    }
+    #description {
+      font-style: italic;
+      font-size: 20px;
+    }
+    #intro {
+      font-size: 20px;
     }
 </style>
 
 {% extends "layout.html" %}
 
 {% block content %}
-
-<h1>
-    It's potluck time!
-</h1>
-<img src="https://cdn.dribbble.com/users/1818/screenshots/2200087/attachments/407150/potluck.png" />
-<h3>
-  Are you hosting or attending a potluck?
-</h3>
-<div class="row buttons">
-  <div class="col-md-6 text-right">
-    <button class="btn btn-info" id="host">Hosting</button>
-  </div>
-  <div class="col-md-6 text-left">
-    <button class="btn btn-info" id="attend">Attending</button>
+<div id="card">
+  <h1>
+      Potlucky
+  </h1>
+  <p id="description">
+      your friendly potluck-organizing tool
+  </p>
+  <br />
+  <br />
+  <p id="intro">
+    Are you hosting or attending a potluck?
+  </p>
+  <div class="row buttons">
+    <div class="col-md-4 text-right">
+      <button class="btn btn-info" id="host">Hosting</button>
+    </div>
+    <div class="col-md-8 text-left">
+      <button class="btn btn-info" id="attend">Attending</button>
+    </div>
   </div>
 </div>
-
 {% endblock %}

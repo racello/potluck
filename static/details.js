@@ -13,12 +13,22 @@ var enter_info = function() {
   var time = document.getElementById("mySelect").value
   var location = $("#enter_location").val()
 
-  var details = {
-    "date": date,
-    "time": time,
-    "location": location
+  if (date == "") {
+    alert("Please pick a date.")
+    $("#datepicker-1").focus()
   }
-  save_info(details)
+  else if (location == "") {
+    alert("Please pick a location.")
+    $("#enter_location").focus()
+  }
+  else {
+    var details = {
+      "date": date,
+      "time": time,
+      "location": location
+    }
+    save_info(details)
+  }
 }
 
 var save_info = function(details) {

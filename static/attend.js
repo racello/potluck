@@ -1,5 +1,6 @@
 $(document).ready(function(){
   display_attendees(items)
+  display_info(potluck)
 
   $(document).on("click", "#find", function() {
     find_entry()
@@ -50,14 +51,30 @@ var display_attendees = function(items) {
     var id = item["id"]
     var row = $("<div class='row entry' id=" + id + ">")
 
-    var col_person = $("<div class='col-md-2'>")
+    var col_person = $("<div class='col-md-4'>")
     $(col_person).append(item["name"])
     $(row).append(col_person)
 
-    var col_food = $("<div class='col-md-2' id='" + id + "'>")
+    var col_food = $("<div class='col-md-4' id='" + id + "'>")
     $(col_food).append(item["food"])
     $(row).append(col_food)
 
     $('#items').prepend(row)
   })
+}
+
+var display_info = function(potluck) {
+  $('#details').empty()
+
+  var date = $("<div class='row deet'>")
+  $(date).append("Date: " + potluck["date"])
+  $('#details').append(date)
+
+  var time = $("<div class='row deet'>")
+  $(time).append("Time: " + potluck["time"])
+  $('#details').append(time)
+
+  var location = $("<div class='row deet'>")
+  $(location).append("Location: " + potluck["location"])
+  $('#details').append(location)
 }

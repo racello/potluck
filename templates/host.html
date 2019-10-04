@@ -27,6 +27,28 @@
     }
     #items {
       margin-left: 10px;
+      overflow-y: auto;
+      height: 35%;
+    }
+    #card {
+      background-color: white;
+      width: 75%;
+      margin: auto;
+      padding: 50px;
+      border-radius: 15px;
+    }
+    #info {
+      position: fixed;
+      width: 15%;
+      top: 45%;
+      left: 55%;
+      border-radius: 15px;
+      margin-bottom: 10px;
+      padding: 20px;
+      background-color: lightyellow;
+    }
+    .deet {
+      padding-left: 17px;
     }
 </style>
 
@@ -34,34 +56,40 @@
 
 {% block content %}
 
-<h4> You decide who's bringing what! &#11088;</h4>
+<div id="card">
+  <h4> You decide who's bringing what! &#11088;</h4>
 
-<p>Current number of guests: {{guests}}</p>
-
-<div class="row" id="icons">
-  <div class="col-md-1">
-    Add entry:
+  <div id="info">
+    <p>Current # of guests: {{guests}}</p>
+    <div id="details">
+    </div>
   </div>
-    <button id="meat" style='font-size:70px' class="btn btn-primary"> <i class='fas fa-drumstick-bite'></i></button>
-    <button id="veggie" style='font-size:70px' class="btn btn-primary icon"> <i class='fas fa-carrot'></i></button>
-    <button id="grain" style='font-size:70px' class="btn btn-primary icon"> <i class='fas fa-bread-slice'></i></button>
-    <button id="appetizer" style='font-size:70px' class="btn btn-primary icon"> <i class='fas fa-cheese'></i></button>
-    <button id="dessert" style='font-size:70px' class="btn btn-primary icon"> <i class='fas fa-cookie-bite'></i></button>
-    <button id="drink" style='font-size:70px' class="btn btn-primary icon"> <i class='fas fa-cocktail'></i></button>
-    <button id="supplies" style='font-size:70px' class="btn btn-primary icon"> <i class='fas fa-utensils'></i></button>
-    <button id="other" style='font-size:70px' class="btn btn-primary icon"> <i class='fas fa-plus'></i></button>
-</div>
 
-<div class="row" id="categories">
-    <div class="col-md-2">
-        Name:
+  <div class="row" id="icons">
+    <div class="col-md-2" style="font-style: italic;">
+      What does the potluck need?
     </div>
-    <div class="col-md-2">
-        Potluck item:
-    </div>
-</div>
+      <button id="meat" style='font-size:50px' class="btn btn-primary"> <i class='fas fa-drumstick-bite'></i></button>
+      <button id="veggie" style='font-size:50px' class="btn btn-primary icon"> <i class='fas fa-carrot'></i></button>
+      <button id="grain" style='font-size:50px' class="btn btn-primary icon"> <i class='fas fa-bread-slice'></i></button>
+      <button id="appetizer" style='font-size:50px' class="btn btn-primary icon"> <i class='fas fa-cheese'></i></button>
+      <button id="dessert" style='font-size:50px' class="btn btn-primary icon"> <i class='fas fa-cookie-bite'></i></button>
+      <button id="drink" style='font-size:50px' class="btn btn-primary icon"> <i class='fas fa-cocktail'></i></button>
+      <button id="supplies" style='font-size:50px' class="btn btn-primary icon"> <i class='fas fa-utensils'></i></button>
+      <button id="other" style='font-size:50px' class="btn btn-primary icon"> <i class='fas fa-plus'></i></button>
+  </div>
 
-<div id="items">
+  <div class="row" id="categories">
+      <div class="col-md-2">
+          Name:
+      </div>
+      <div class="col-md-2">
+          Potluck item:
+      </div>
+  </div>
+
+  <div id="items">
+  </div>
 </div>
 
 {% endblock %}

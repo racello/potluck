@@ -1,5 +1,6 @@
 $(document).ready(function(){
   display_data(items)
+  display_info(potluck)
 
   //add protein
   $('#meat').click(function() {
@@ -91,6 +92,22 @@ var update_data = function(rewrite) {
       console.log(error)
     }
   })
+}
+
+var display_info = function(potluck) {
+  $('#details').empty()
+
+  var date = $("<div class='row deet'>")
+  $(date).append("Date: " + potluck["date"])
+  $('#details').append(date)
+
+  var time = $("<div class='row deet'>")
+  $(time).append("Time: " + potluck["time"])
+  $('#details').append(time)
+
+  var location = $("<div class='row deet'>")
+  $(location).append("Location: " + potluck["location"])
+  $('#details').append(location)
 }
 
 var display_data = function(items) {
