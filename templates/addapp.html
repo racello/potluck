@@ -5,22 +5,43 @@
 <!-- my scripts -->
 <script type="text/javascript" src="{{ url_for('static', filename = 'add.js') }}"></script>
 
+<style>
+  #card {
+    background-color: white;
+    width: 40%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 50px;
+    border-radius: 15px;
+  }
+  #select, #enter_name, #submit {
+    margin-left: 15px;
+  }
+</style>
+
 {% extends "layout.html" %}
 
 {% block content %}
 
-<h4>Add an appetizer to your potluck: </h4>
+<div id="card">
+  <h4>Add an appetizer to your potluck: </h4>
+  <br />
+  <br />
+  Type:
+  <select id="select">
+    <option value="Cheese">Cheese</option>
+    <option value="Crackers">Crackers</option>
+    <option value="Chips">Chips</option>
+    <option value="Deviled Eggs">Deviled Eggs</option>
+    <option value="Fruit">Fruit</option>
+  </select>
+  <br />
+  <br />
+  Who's bringing it?
+  <input type="text" id="enter_name" placeholder="Name"></input>
+  <button class="btn btn-primary" id="submit">Submit</button>
+</div>
 
-Type:
-<select id="select">
-  <option value="Cheese">Cheese</option>
-  <option value="Crackers">Crackers</option>
-  <option value="Chips">Chips</option>
-  <option value="Deviled Eggs">Deviled Eggs</option>
-  <option value="Fruit">Fruit</option>
-</select>
-
-Who's bringing it?
-<input type="text" id="enter_name" placeholder="Name"></input>
-<button class="btn btn-primary" id="submit">Submit</button>
 {% endblock %}
