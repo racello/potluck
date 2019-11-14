@@ -169,6 +169,10 @@ food = [
 def home():
    return render_template('home.html', potluck = potluck, guests = guests, items = items, current_id = current_id, food = food)
 
+@app.route('/tasks')
+def tasks(name=None):
+    return render_template('tasks.html', potluck=potluck, guests=guests, items=items, current_id=current_id, food=food)
+
 @app.route('/host')
 def host(name=None):
     return render_template('host.html', potluck = potluck, guests = guests, items = items, current_id = current_id, food = food)
