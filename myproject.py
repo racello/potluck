@@ -134,7 +134,7 @@ items = [
         "food": "boba"
     },
 ]
-guests = len(items)
+#guests = len(items)
 
 #no longer in use but just keep here for sake of ease lol
 food = [
@@ -165,13 +165,53 @@ food = [
     "boba",
 ];
 
+chores = [
+    "Wash the dishes",
+    "Set the table",
+    "Bring drinks",
+    "Bring dessert",
+    "Cook food",
+]
+
+guests = [
+    {
+        "name": "Yuval",
+        "tasks": [],
+        "points": 100
+    },
+    {
+        "name": "Christina",
+        "tasks": [],
+        "points": 50
+    },
+    {
+        "name": "Julien",
+        "tasks": [],
+        "points": 25
+    },
+    {
+        "name": "Ning",
+        "tasks": [],
+        "points": 75
+    },
+]
+
 @app.route('/')
 def home():
    return render_template('home.html', potluck = potluck, guests = guests, items = items, current_id = current_id, food = food)
 
 @app.route('/tasks')
 def tasks(name=None):
-    return render_template('tasks.html', potluck=potluck, guests=guests, items=items, current_id=current_id, food=food)
+    return render_template('tasks.html', potluck=potluck, guests=guests, chores=chores, items=items, current_id=current_id, food=food)
+
+@app.route('/update_tasks', methods=['GET', 'POST'])
+def update_tasks():
+    global chores
+
+    new_task = request.get_json()
+    chores.append(new_task)
+
+    return jsonify(guests=guests, chores=chores)
 
 @app.route('/host')
 def host(name=None):
