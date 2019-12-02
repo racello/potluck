@@ -1,40 +1,63 @@
-<!DOCTYPE html>
-<html lang = "en">
-  <head>
-    <!-- bootstrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
-    <!--JQuery-->
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <!-- d3 -->
-    <script src="https://d3js.org/d3.v5.min.js" charset="utf-8"></script>
-    <!-- My Scripts -->
-    <script type="text/javascript" src="{{ url_for('static', filename = 'tasks.js') }}"></script>
-    <script>
-        guests = {{guests|tojson}}
-        chores = {{chores|tojson}}
-    </script>
 
-    <style>
-        .container-fluid {
-          padding: 50px;
-        }
-    </style>
-  </head>
-  <body>
-    <div class="container-fluid">
+<!-- bootstrap -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+<!--JQuery-->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<!-- d3 -->
+<script src="https://d3js.org/d3.v5.min.js" charset="utf-8"></script>
+<!-- My Scripts -->
+<script type="text/javascript" src="{{ url_for('static', filename = 'tasks.js') }}"></script>
+
+<style>
+    .container-fluid {
+      padding: 50px;
+    }
+    .btn {
+      margin: 5px;
+    }
+    #droppick {
+      display: none;
+    }
+    #details {
+      margin-left: 20px;
+      margin-bottom: 20px;
+    }
+</style>
+
+{% extends "layout.html" %}
+
+{% block content %}
       <div class="row">
         <div class="col-md-4">
-            <h2>Tasks</h2>
-            <div id="chores"></div>
+            <h2>Event info: </h2>
+            <div id="details"></div>
+            <!-- <h2>Tasks</h2> -->
+            <!-- <div id="chores"></div>
             <input type="text" id="add_task" placeholder="Add task"></input>
-            <button type="button" id="enter" class="btn btn-info">Enter</button>
+            <button type="button" id="enter" class="btn btn-info">Enter</button> -->
+            <!-- <br /> -->
+            <div id="info">
+              <h3>See task info for:</h3>
+              <p style="font-style: italic;"> Assign tasks to guests until all tasks are assigned <br /> and an even balance has been struck.
+              <br />
+              <br />
+              Tasks cannot be assigned to more than one person each, <br /> nor can a person take on the same task multiple times.
+              </p>
+              <div id="guests"></div>
+              <br />
+              <div id="task_info"></div>
+              <div id="droppick">
+                Add more:
+                <select id="mySelect">
+                </select>
+                <button type="button" id="add" class="btn btn-info">Add</button>
+              </div>
+            </div>
         </div>
         <div class="col-md-8">
           <svg height="600" width="1000"></svg>
         </div>
       </div>
-    </div>
-  </body>
-</html>
+{% endblock %}

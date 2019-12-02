@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <!--JQuery-->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <!-- My Scripts -->
+    <script type="text/javascript" src="{{ url_for('static', filename = 'guest.js') }}"></script>
+    <script>
+        guests = {{guests|tojson}}
+        chores = {{chores|tojson}}
+        guest_name = {{guest_name|tojson}}
+    </script>
+
+    <style>
+        .container-fluid {
+          padding: 50px;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <h2 id="name"></h2>
+      <h3> Tasks: </h3>
+      <div id="tasks"></div>
+      <h3> Task points: </h3>
+      <div id="points"></div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,20 @@
+<!--JQuery-->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<!-- my scripts -->
+<script type="text/javascript" src="{{ url_for('static', filename = 'guestlist.js') }}"></script>
+
+{% extends "layout.html" %}
+
+{% block content %}
+
+<h3> Who will you invite? </h3>
+<p> Current guest list: </p>
+<div id="guestlist"> </div>
+Invite: <input type="text" id="invite_guest" placeholder="Name"></input>
+<button class="btn btn-primary" id="enter">Enter</button>
+<br />
+<button class="btn btn-info" id="next">Next</button>
+
+{% endblock %}

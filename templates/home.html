@@ -25,7 +25,7 @@
       position: fixed;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%);
+      transform: translate(-50%, -60%);
       padding: 50px;
       border-radius: 15px;
     }
@@ -43,7 +43,7 @@
 {% block content %}
 <div id="card">
   <h1>
-      Potlucky
+      Welcome to Potlucky!
   </h1>
   <p id="description">
       your friendly potluck-organizing tool
@@ -51,15 +51,8 @@
   <br />
   <br />
   <p id="intro">
-    Are you hosting or attending a potluck?
+    Potlucky helps you organize your potluck, keeping track of tricky details like <b>date, time, place, guests,</b> and most importantly, <b>who plays what role</b> in the potluck!
   </p>
-  <div class="row buttons">
-    <div class="col-md-4 text-right">
-      <button class="btn btn-info" id="host">Hosting</button>
-    </div>
-    <div class="col-md-8 text-left">
-      <button class="btn btn-info" id="attend">Attending</button>
-    </div>
-  </div>
+  <button class="btn btn-info" id="host">Get started</button>
 </div>
 {% endblock %}

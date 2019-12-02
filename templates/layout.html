@@ -9,18 +9,16 @@
     <!-- My Scripts -->
     <script type="text/javascript" src="{{ url_for('static', filename = 'home.js') }}"></script>
     <script>
-        items = {{items|tojson}}
-        food = {{food|tojson}}
         potluck = {{potluck|tojson}}
-        current_id = {{current_id|tojson}}
         guests = {{guests|tojson}}
+        chores = {{chores|tojson}}
     </script>
 
     <style>
       .container-fluid {
         padding: 45px;
       }
-      body::after {
+      /* body::after {
         content: "";
         background: url("https://www.makeitgrateful.com/wp-content/uploads/2018/08/potluck-dinner-table.jpg");
         opacity: 0.5;
@@ -30,7 +28,7 @@
         right: 0;
         position: absolute;
         z-index: -1;
-      }
+      } */
     </style>
   </head>
   <body>
@@ -38,11 +36,23 @@
         <a class="navbar-brand" href="/">Potlucky</a>
         <ul class="navbar-nav">
           <li class="nav-item">
+            <a class="nav-link" href="/details">Event Info</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/guestlist">Guest List</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/tasklist">Task List</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/tasks">Task Tracker</a>
+          </li>
+          <!-- <li class="nav-item">
             <a class="nav-link" href="/host">For the host</a>
           </li>
           <li class="nav-item">
               <a class="nav-link" href="/attend">For the attendee</a>
-          </li>
+          </li> -->
         </ul>
       </nav>
       <div class="container-fluid">

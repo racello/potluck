@@ -3,259 +3,170 @@ from flask import render_template
 from flask import Response, request, jsonify
 app = Flask(__name__)
 
-current_id = 26
-
 potluck = {}
+# chores = []
+# guests = []
 
-items = [
-    {
-        "id": 1,
-        "name": "Yuval",
-        "food": "veggies"
-    },
-    {
-        "id": 2,
-        "name": "Christina",
-        "food": "cherries"
-    },
-    {
-        "id": 3,
-        "name": "Bill",
-        "food": "beer"
-    },
-    {
-        "id": 4,
-        "name": "Julien",
-        "food": "juice"
-    },
-    {
-        "id": 5,
-        "name": "Jeff",
-        "food": "melon drink"
-    },
-    {
-        "id": 6,
-        "name": "Bri",
-        "food": "bread"
-    },
-    {
-        "id": 7,
-        "name": "Ning",
-        "food": "noodles"
-    },
-    {
-        "id": 8,
-        "name": "Gabby",
-        "food": "cookies"
-    },
-    {
-        "id": 9,
-        "name": "Joslyn",
-        "food": "tea"
-    },
-    {
-        "id": 10,
-        "name": "Malik",
-        "food": "chips"
-    },
-    {
-        "id": 11,
-        "name": "Jahlin",
-        "food": "ramen"
-    },
-    {
-        "id": 12,
-        "name": "Sophia",
-        "food": "chocolate"
-    },
-    {
-        "id": 13,
-        "name": "Anthony",
-        "food": "cheetos"
-    },
-    {
-        "id": 14,
-        "name": "Amanda",
-        "food": "dumplings"
-    },
-    {
-        "id": 15,
-        "name": "Yijun",
-        "food": "soju"
-    },
-    {
-        "id": 16,
-        "name": "Justin",
-        "food": "rice crackers"
-    },
-    {
-        "id": 17,
-        "name": "T",
-        "food": "tangerines"
-    },
-    {
-        "id": 18,
-        "name": "Cher",
-        "food": "gummies"
-    },
-    {
-        "id": 19,
-        "name": "Sachi",
-        "food": "candy"
-    },
-    {
-        "id": 20,
-        "name": "Kelly",
-        "food": "butter mochi"
-    },
-    {
-        "id": 21,
-        "name": "Cameron",
-        "food": "beans"
-    },
-    {
-        "id": 22,
-        "name": "Colin",
-        "food": "stir fry"
-    },
-    {
-        "id": 23,
-        "name": "Siena",
-        "food": "fruit"
-    },
-    {
-        "id": 24,
-        "name": "Lily",
-        "food": "pastries"
-    },
-    {
-        "id": 25,
-        "name": "Olivia",
-        "food": "boba"
-    },
-]
-#guests = len(items)
-
-#no longer in use but just keep here for sake of ease lol
-food = [
-    "veggies",
-    "cherries",
-    "beer",
-    "juice",
-    "melon drink",
-    "bread",
-    "noodles",
-    "cookies",
-    "tea",
-    "chips",
-    "ramen",
-    "chocolate",
-    "cheetos",
-    "dumplings",
-    "soju",
-    "rice crackers",
-    "tangerines",
-    "gummies",
-    "candy",
-    "butter mochi",
-    "beans",
-    "stir fry",
-    "fruit",
-    "pastries",
-    "boba",
-];
-
+#0 = false, 1 = true
 chores = [
-    "Wash the dishes",
-    "Set the table",
-    "Bring drinks",
-    "Bring dessert",
-    "Cook food",
+    {
+        "task": "Wash the dishes",
+        "assigned": 1,
+        "points": 25
+    },
+    {
+        "task": "Set the table",
+        "assigned": 1,
+        "points": 25
+    },
+    {
+        "task": "Bring drinks",
+        "assigned": 1,
+        "points": 75
+    },
+    {
+        "task": "Bring dessert",
+        "assigned": 1,
+        "points": 25
+    },
+    {
+        "task": "Cook food",
+        "assigned": 1,
+        "points": 100
+    },
 ]
 
 guests = [
     {
         "name": "Yuval",
-        "tasks": [],
+        "tasks": ["Cook food (100)"],
         "points": 100
     },
     {
         "name": "Christina",
-        "tasks": [],
+        "tasks": ["Bring dessert (25)", "Set the table (25)"],
         "points": 50
     },
     {
         "name": "Julien",
-        "tasks": [],
+        "tasks": ["Wash the dishes (25)"],
         "points": 25
     },
     {
         "name": "Ning",
-        "tasks": [],
+        "tasks": ["Bring drinks (75)"],
         "points": 75
     },
 ]
 
 @app.route('/')
 def home():
-   return render_template('home.html', potluck = potluck, guests = guests, items = items, current_id = current_id, food = food)
+    return render_template('home.html', potluck=potluck, guests=guests, chores=chores)
+
+@app.route('/tasklist')
+def tasklist(name=None):
+    return render_template('tasklist.html', potluck=potluck, guests=guests, chores=chores)
 
 @app.route('/tasks')
 def tasks(name=None):
-    return render_template('tasks.html', potluck=potluck, guests=guests, chores=chores, items=items, current_id=current_id, food=food)
+    return render_template('tasks.html', potluck=potluck, guests=guests, chores=chores)
 
 @app.route('/update_tasks', methods=['GET', 'POST'])
 def update_tasks():
     global chores
-
     new_task = request.get_json()
     chores.append(new_task)
+    return jsonify(potluck=potluck, guests=guests, chores=chores)
 
-    return jsonify(guests=guests, chores=chores)
+@app.route('/assign', methods=['GET', 'POST'])
+def assign():
+    global guests
+    global chores
+
+    assignment = request.get_json()
+    name = assignment['name']
+    task = assignment['task']
+    points = int (task[-3:-1])
+
+    print(task[:-5]) #get task name without (pts) at end
+    for c in chores:
+        #if the task name matches and is not already assigned
+        if task[:-5] == c['task'] and c['assigned'] == 0:
+            c['assigned'] = 1
+            print(chores)
+            for g in guests:
+                #add task to guest's assignments
+                if name == g['name']:
+                    g['tasks'].append(task)
+                    g['points'] += points
+
+    return jsonify(potluck=potluck, guests=guests, chores=chores)
+
+@app.route('/guestlist')
+def guestlist(name=None):
+    return render_template('guestlist.html', potluck=potluck, guests=guests, chores=chores)
+
+@app.route('/add_guest', methods=['GET', 'POST'])
+def add_guest():
+    global guests
+    name = request.get_json()
+
+    guest_info = {}
+    guest_info['name'] = name
+    guest_info['tasks'] = []
+    guest_info['points'] = 0
+    guests.append(guest_info)
+
+    return jsonify(potluck=potluck, guests=guests, chores=chores)
+
+#honestly probably don't need this lol
+@app.route('/guest/<guest_name>')
+def guest(guest_name=None):
+    return render_template('guest.html', guest_name=guest_name, potluck=potluck, guests=guests, chores=chores)
 
 @app.route('/host')
 def host(name=None):
-    return render_template('host.html', potluck = potluck, guests = guests, items = items, current_id = current_id, food = food)
+    return render_template('host.html', potluck=potluck, guests=guests, chores=chores)
 
 @app.route('/attend')
 def attend(name=None):
-    return render_template('attend.html', potluck = potluck, guests = guests, items = items, current_id = current_id, food = food)
+    return render_template('attend.html', potluck=potluck, guests=guests, chores=chores)
 
 @app.route('/details')
 def details(name=None):
-    return render_template('details.html', potluck = potluck, guests = guests, items = items, current_id = current_id, food = food)
+    return render_template('details.html', potluck=potluck, guests=guests, chores=chores)
 
 @app.route('/addmeat')
 def addmeat(name=None):
-    return render_template('addmeat.html', potluck = potluck, guests = guests, items = items, current_id = current_id, food = food)
+    return render_template('addmeat.html', potluck=potluck, guests=guests, chores=chores)
 
 @app.route('/addveggie')
 def addveggie(name=None):
-    return render_template('addveggie.html', potluck = potluck, guests = guests, items = items, current_id = current_id, food = food)
+    return render_template('addveggie.html', potluck=potluck, guests=guests, chores=chores)
 
 @app.route('/addgrain')
 def addgrain(name=None):
-    return render_template('addgrain.html', potluck = potluck, guests = guests, items = items, current_id = current_id, food = food)
+    return render_template('addgrain.html', potluck=potluck, guests=guests, chores=chores)
 
 @app.route('/addapp')
 def addapp(name=None):
-    return render_template('addapp.html', potluck = potluck, guests = guests, items = items, current_id = current_id, food = food)
+    return render_template('addapp.html', potluck=potluck, guests=guests, chores=chores)
 
 @app.route('/adddessert')
 def adddessert(name=None):
-    return render_template('adddessert.html', potluck = potluck, guests = guests, items = items, current_id = current_id, food = food)
+    return render_template('adddessert.html', potluck=potluck, guests=guests, chores=chores)
 
 @app.route('/adddrink')
 def adddrink(name=None):
-    return render_template('adddrink.html', potluck = potluck, guests = guests, items = items, current_id = current_id, food = food)
+    return render_template('adddrink.html', potluck=potluck, guests=guests, chores=chores)
 
 @app.route('/addsupplies')
 def addsupplies(name=None):
-    return render_template('addsupplies.html', potluck = potluck, guests = guests, items = items, current_id = current_id, food = food)
+    return render_template('addsupplies.html', potluck=potluck, guests=guests, chores=chores)
 
 @app.route('/addother')
 def addother(name=None):
-    return render_template('addother.html', potluck = potluck, guests = guests, items = items, current_id = current_id, food = food)
+    return render_template('addother.html', potluck=potluck, guests=guests, chores=chores)
 
 @app.route('/save_info', methods=['GET', 'POST'])
 def save_info():
