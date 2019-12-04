@@ -75,7 +75,16 @@ def tasks(name=None):
 def update_tasks():
     global chores
     new_task = request.get_json()
-    chores.append(new_task)
+    task = new_task['task']
+    assigned = new_task['assigned']
+    points = int(new_task['points'])
+
+    chore = {
+        'task': task,
+        'assigned': assigned,
+        'points': points
+    }
+    chores.append(chore)
     return jsonify(potluck=potluck, guests=guests, chores=chores)
 
 @app.route('/assign', methods=['GET', 'POST'])
