@@ -41,9 +41,41 @@ var add_guest = function(name) {
 
 var display_guests = function(guests) {
   $('#guestlist').empty()
-  $('<ul>').appendTo($('#guestlist'))
   $.each(guests, function(index, value) {
-    $('<li>' + value['name'] + '</li>').appendTo($('#guestlist'))
+    var row = $("<div class='row guestrow'>")
+
+    var col_guest = $("<div class='col-md-2'>")
+    $(col_guest).append(value['name'])
+    $(row).append(col_guest)
+
+    var delete_button = $("<button class='btn btn-danger'> X </button>")
+    $(delete_button).click(function() {
+      var bye = this.previousSibling.innerHTML
+      delete_guest(bye)
+    })
+    $(row).append(delete_button)
+
+    $('#guestlist').append(row)
   })
-  $('</ul>').appendTo($('#guestlist'))
+}
+
+var delete_guest = function(name) {
+  $.ajax({
+    type: "POST",
+    url: "delete_guest",
+    dataType: "json",
+    contentType: "application/json; charset=utf-8",
+    data: JSON.stringify(name),
+    success: function(data, text) {
+      var data = data['guests']
+      console.log(data)
+      display_guests(data)
+    },
+    error: function(request, status, error) {
+      console.log("Error")
+      console.log(request)
+      console.log(status)
+      console.log(error)
+    }
+  })
 }

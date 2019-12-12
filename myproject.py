@@ -87,6 +87,26 @@ def update_tasks():
     chores.append(chore)
     return jsonify(potluck=potluck, guests=guests, chores=chores)
 
+@app.route('/delete_task', methods=['GET', 'POST'])
+def delete_task():
+    global chores
+    global guests
+    bye = request.get_json()
+
+    for c in chores:
+        if bye == c['task']:
+            points = c['points']
+            chores.remove(c)
+            
+    #delete task from guest, adjust guest's points
+    for g in guests:
+        for t in g['tasks']:
+            if bye == t[:-5]:
+                g['tasks'].remove(t)
+                g['points'] -= points
+
+    return jsonify(potluck=potluck, guests=guests, chores=chores)
+
 @app.route('/assign', methods=['GET', 'POST'])
 def assign():
     global guests
@@ -125,6 +145,25 @@ def add_guest():
     guest_info['tasks'] = []
     guest_info['points'] = 0
     guests.append(guest_info)
+
+    return jsonify(potluck=potluck, guests=guests, chores=chores)
+
+@app.route('/delete_guest', methods=['GET', 'POST'])
+def delete_guest():
+    global guests
+    global chores
+    name = request.get_json()
+
+    for g in guests:
+        if name == g['name']:
+            guest_tasks = g['tasks']
+            guests.remove(g)
+
+    #any tasks assigned to deleted guest are now unassigned
+    for t in guest_tasks:
+        for c in chores:
+            if t[:-5] == c['task']:
+                c['assigned'] = 0
 
     return jsonify(potluck=potluck, guests=guests, chores=chores)
 

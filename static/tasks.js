@@ -35,6 +35,7 @@ $(document).ready(function(){
         task: task
       }
       assign_task(assignment)
+      dropdown_tasks(chores)
   })
 })
 
@@ -116,10 +117,12 @@ var assign_task = function(assignment) {
 var dropdown_tasks = function(chores) {
   $('#mySelect').empty()
   $.each(chores, function(index, value) {
-    var chore = value["task"] + " (" + value["points"] + ")"
-    $('#mySelect').append(
-        $('<option></option>').val(chore).html(chore)
-    )
+    if (value['assigned'] == 0) {
+      var chore = value["task"] + " (" + value["points"] + ")"
+      $('#mySelect').append(
+          $('<option></option>').val(chore).html(chore)
+      )
+    }
   })
   $('#mySelect').change()
 }

@@ -18,13 +18,48 @@ var display_tasks = function(chores) {
   $.each(chores, function(index, value) {
     var id = index + 1
     var container = $('#chores')
-    $('<input />', { type: 'checkbox', id: 'cb'+id, value: value["task"]}).appendTo(container);
-    $('<label />', { 'for': 'cb'+id, text: value["task"] + " (" + value["points"] + ")"}).appendTo(container);
+
+    var row = $("<div class='row chorerow'>")
+
+    $(row).append($('<input />', { type: 'checkbox', id: 'cb'+id, value: value["task"]}))
+    var col_chore = $("<div class='col-md-4'>")
+    $(col_chore).append($('<label />', { 'for': 'cb'+id, text: value["task"] + " (" + value["points"] + ")"}))
+    $(row).append(col_chore)
+
+    var delete_button = $("<button class='btn btn-danger'> X </button>")
+    $(delete_button).click(function() {
+      var bye = value['task']
+      delete_task(bye)
+    })
+    $(row).append(delete_button)
+
+    $(container).append(row)
+
     if (value['assigned'] == 1) {
       console.log("check box")
       $('#cb' + id).prop('checked', true)
     }
-    $('<br />').appendTo(container);
+  })
+}
+
+var delete_task = function(bye) {
+  $.ajax({
+    type: "POST",
+    url: "delete_task",
+    dataType: "json",
+    contentType: "application/json; charset=utf-8",
+    data: JSON.stringify(bye),
+    success: function(data, text) {
+      var data = data['chores']
+      console.log(data)
+      display_tasks(data)
+    },
+    error: function(request, status, error) {
+      console.log("Error")
+      console.log(request)
+      console.log(status)
+      console.log(error)
+    }
   })
 }
 
