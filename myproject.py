@@ -4,60 +4,60 @@ from flask import Response, request, jsonify
 app = Flask(__name__)
 
 potluck = {}
-# chores = []
-# guests = []
+chores = []
+guests = []
 
 #0 = false, 1 = true
-chores = [
-    {
-        "task": "Wash the dishes",
-        "assigned": 1,
-        "points": 25
-    },
-    {
-        "task": "Set the table",
-        "assigned": 1,
-        "points": 25
-    },
-    {
-        "task": "Bring drinks",
-        "assigned": 1,
-        "points": 75
-    },
-    {
-        "task": "Bring dessert",
-        "assigned": 1,
-        "points": 25
-    },
-    {
-        "task": "Cook food",
-        "assigned": 1,
-        "points": 100
-    },
-]
-
-guests = [
-    {
-        "name": "Yuval",
-        "tasks": ["Cook food (100)"],
-        "points": 100
-    },
-    {
-        "name": "Christina",
-        "tasks": ["Bring dessert (25)", "Set the table (25)"],
-        "points": 50
-    },
-    {
-        "name": "Julien",
-        "tasks": ["Wash the dishes (25)"],
-        "points": 25
-    },
-    {
-        "name": "Ning",
-        "tasks": ["Bring drinks (75)"],
-        "points": 75
-    },
-]
+# chores = [
+#     {
+#         "task": "Wash the dishes",
+#         "assigned": 1,
+#         "points": 25
+#     },
+#     {
+#         "task": "Set the table",
+#         "assigned": 1,
+#         "points": 25
+#     },
+#     {
+#         "task": "Bring drinks",
+#         "assigned": 1,
+#         "points": 75
+#     },
+#     {
+#         "task": "Bring dessert",
+#         "assigned": 1,
+#         "points": 25
+#     },
+#     {
+#         "task": "Cook food",
+#         "assigned": 1,
+#         "points": 100
+#     },
+# ]
+#
+# guests = [
+#     {
+#         "name": "Yuval",
+#         "tasks": ["Cook food (100)"],
+#         "points": 100
+#     },
+#     {
+#         "name": "Christina",
+#         "tasks": ["Bring dessert (25)", "Set the table (25)"],
+#         "points": 50
+#     },
+#     {
+#         "name": "Julien",
+#         "tasks": ["Wash the dishes (25)"],
+#         "points": 25
+#     },
+#     {
+#         "name": "Ning",
+#         "tasks": ["Bring drinks (75)"],
+#         "points": 75
+#     },
+# ]
 
 @app.route('/')
 def home():
@@ -97,7 +97,7 @@ def delete_task():
         if bye == c['task']:
             points = c['points']
             chores.remove(c)
-            
+
     #delete task from guest, adjust guest's points
     for g in guests:
         for t in g['tasks']:
